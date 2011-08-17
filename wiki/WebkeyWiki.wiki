@@ -1,4 +1,4 @@
-#summary Webkey
+#summary Use Webkey
 
 = How can I connect to the phone? Why is everything so complicated? =
 
