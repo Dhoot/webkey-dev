@@ -1,0 +1,21 @@
+#summary One-sentence summary of this page.
+
+= How can I connect to the phone? Why is everything so complicated? =
+
+Webkey opens a standard TCP socket (port 80 is for http), and listens on that port. After starting the service, your phone writes something like:
+Your phone is available at:
+http://11.22.33.44
+where in this example "11.22.33.44" is the IP address of your phone. Usually it is not so easy to remember, changes sometimes, and some 3g internet providers blocks it.
+
+= Unable to connect =
+
+If you are unable to connect to this address in your webbrowser, then your 3G internet provider blocks the incoming connections to your phone. Users from USA and UK complained about it. (If you are an expert, you can set up a VPN or an ssh reverse port forwarding. If you know how to do that, then stop reading.) However, the easiest solution is to use our server to forward the connection. Namely, your phone connects to our server (it works, because your phone starts the connection), and wait until you visit http://androidwebkey.com/nickname/. Then our server uses the opened connection (which was opened by the phone) to send the request. After that our server forwards every messages between your phone and your browser.
+To use this, click on "Keep alive connection to androidwebkey.com". (If you don't use, it has minimal network traffic, only some bytes to open the connection.)
+
+= But I can connect using my IP =
+
+It should work on WiFi (then the IP address is usually something like 192.168.1.x), but then it is only accessable from the local area.
+If it works on 3G, then you are lucky! It's not easy to remember the IP address, and usually it changes. You can use DynDNS to have an address like
+http://yourphone.homeip.net
+or something like that. Webkey has an option to refresh the IP address in the DynDNS database (otherwise how could they know when it has changed). Actually it checks your IP every minute, and if it differs from the last updated one, then it send the new IP to DynDNS.
+Actually, if you use our server, it will redirect your browser directly to the phone, you will see a message like Your phone has a public IP, redirecting to ... (How it works: the server tries to connect back to the phone whenever it connects from a new IP address. If it can reach the phone, then the server will remember to do so.)
